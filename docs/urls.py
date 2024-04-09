@@ -7,4 +7,5 @@ router.register(r'documents', DocumentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+
 ]

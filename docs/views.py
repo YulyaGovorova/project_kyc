@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from docs.models import Document
 from docs.serializers import DocumentSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
+from docs.tasks import send_notification_email
 
 
 class DocumentViewSet(viewsets.ModelViewSet):
