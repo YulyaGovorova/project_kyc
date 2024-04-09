@@ -1,8 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from docs.utils import NULLABLE
 
+
+NULLABLE = {'null': True, 'blank': True}
 
 class User(AbstractUser):
     username = models.CharField(max_length=50, verbose_name='username', **NULLABLE)

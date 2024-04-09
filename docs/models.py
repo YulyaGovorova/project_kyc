@@ -1,4 +1,5 @@
 from django.db import models
+from notifications.models import Notification
 
 from users.models import User
 
@@ -31,3 +32,25 @@ class DocumentStatusChange(models.Model):
     class Meta:
         verbose_name = "Document Status Change"
         verbose_name_plural = "Document Status Changes"
+
+
+class DocumentStatus(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Статус документа'
+        verbose_name_plural = 'Статусы документов'
+
+
+class CustomNotification(Notification):
+    document = models.ForeignKey(Document, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Уведомление для документа {self.document}'
+
+    class Meta:
+        verbose_name = 'Пользовательское уведомление'
+        verbose_name_plural = 'Пользовательские уведомления'
