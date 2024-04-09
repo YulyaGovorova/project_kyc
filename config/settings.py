@@ -163,6 +163,7 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_BEAT_SCHEDULE = {
     'send-notification-every-1-minutes': {
         'task': 'docs.tasks.send_notification_email',  # Путь к задаче
-        'schedule': timedelta(minutes=1),  # Расписание выполнения задачи (например, каждые 10 минут)
+        'schedule': timedelta(minutes=1),
+        'args': ('recipient@example.com', 'Hello, world!'),
     },
 }

@@ -1,6 +1,4 @@
 
-
-
 from notifications.signals import notify
 
 def send_document_status_notification(document, status):
