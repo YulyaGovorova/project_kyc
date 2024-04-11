@@ -19,6 +19,11 @@ class Document(models.Model):
         verbose_name = "Document"
         verbose_name_plural = "Documents"
 
+    def approve_document(self, user):
+        self.status = 'approved'
+        self.save()
+        DocumentStatusChange.objects.create(document=self, status='approved', changed_by=user)
+
 
 class DocumentStatusChange(models.Model):
     document = models.ForeignKey(Document, on_delete=models.CASCADE)

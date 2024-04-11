@@ -167,3 +167,4 @@ CELERY_BEAT_SCHEDULE = {
         'args': ('recipient@example.com', 'Hello, world!'),
     },
 }
+

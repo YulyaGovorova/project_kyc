@@ -14,7 +14,11 @@ class DocumentViewSet(viewsets.ModelViewSet):
     # def perform_create(self, serializer):
     #     serializer.save(user=self.request.user)
 
+    # def perform_create(self, serializer):
+    #     instance = serializer.save()
+    #     # Отправляем уведомление администратору
+    #     send_notification_email.delay('admin@example.com', 'New document uploaded.')
+
     def perform_create(self, serializer):
         instance = serializer.save()
-        # Отправляем уведомление администратору
-        send_notification_email.delay('admin@example.com', 'New document uploaded.')
+        send_notification_email.delay('admin@example.com', f'New document uploaded: {instance.title}')
