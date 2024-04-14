@@ -1,4 +1,5 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.response import Response
 
 from docs.models import Document
 from docs.serializers import DocumentSerializer
@@ -11,14 +12,18 @@ class DocumentViewSet(viewsets.ModelViewSet):
     serializer_class = DocumentSerializer
     parser_classes = (MultiPartParser, FormParser)
 
-    # def perform_create(self, serializer):
-    #     serializer.save(user=self.request.user)
+    def create(self, request, *args, **kwargs):
+        print('Received request to create a new document')
 
-    # def perform_create(self, serializer):
-    #     instance = serializer.save()
-    #     # Отправляем уведомление администратору
-    #     send_notification_email.delay('admin@example.com', 'New document uploaded.')
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer):
         instance = serializer.save()
+        print(f'New document created: {instance.title}')
+
         send_notification_email.delay('admin@example.com', f'New document uploaded: {instance.title}')

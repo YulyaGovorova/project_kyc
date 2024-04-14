@@ -16,8 +16,8 @@ class Document(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = "Document"
-        verbose_name_plural = "Documents"
+        verbose_name = "Документ"
+        verbose_name_plural = "Документы"
 
     def approve_document(self, user):
         self.status = 'approved'
@@ -35,8 +35,8 @@ class DocumentStatusChange(models.Model):
         return f"{self.document.title} - {self.status}"
 
     class Meta:
-        verbose_name = "Document Status Change"
-        verbose_name_plural = "Document Status Changes"
+        verbose_name = "Изменен статус документа"
+        verbose_name_plural = "Изменены статусы документов"
 
 
 class DocumentStatus(models.Model):
@@ -46,8 +46,8 @@ class DocumentStatus(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Статус документа'
-        verbose_name_plural = 'Статусы документов'
+        verbose_name = "Статус документа"
+        verbose_name_plural = "Статусы документов"
 
 
 class CustomNotification(Notification):
@@ -57,5 +57,5 @@ class CustomNotification(Notification):
         return f'Уведомление для документа {self.document}'
 
     class Meta:
-        verbose_name = 'Пользовательское уведомление'
-        verbose_name_plural = 'Пользовательские уведомления'
+        verbose_name = "Пользовательское уведомление"
+        verbose_name_plural = "Пользовательские уведомления"
