@@ -24,12 +24,12 @@ class UserTestCase(TestCase):
         self.assertEqual(mail.outbox[0].body, 'Поступил новый документ')
 
 
-# class CommandTestCase(TestCase):
-#     def test_create_superuser_command(self):
-#         call_command('createsuperuser')
-#
-#         superuser = get_user_model().objects.filter(email='from@example.com').first()
-#         self.assertIsNotNone(superuser)
-#         self.assertTrue(superuser.is_staff)
-#         self.assertTrue(superuser.is_superuser)
-#         self.assertTrue(superuser.check_password(os.getenv('ADMIN_PASSWORD')))
+class CommandTestCase(TestCase):
+    def test_create_superuser_command(self):
+        call_command('createsuperuser')
+
+        superuser = get_user_model().objects.filter(email='from@example.com').first()
+        self.assertIsNotNone(superuser)
+        self.assertTrue(superuser.is_staff)
+        self.assertTrue(superuser.is_superuser)
+        self.assertTrue(superuser.check_password(os.getenv('ADMIN_PASSWORD')))
