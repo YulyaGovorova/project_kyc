@@ -6,6 +6,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient, APITestCase
 from docs.models import Document, DocumentStatusChange
+from docs.tasks import send_notification_email
 
 from users.models import User
 
@@ -21,6 +22,13 @@ class DocumentModelTestCase(TestCase):
         self.assertTrue(
             DocumentStatusChange.objects.filter(document=document, status='approved', changed_by=user).exists())
 
+    def test_send_notification_email(self):
+        recipient_email = 'test@example.com'
+        message = 'Test message'
+
+        send_notification_email(recipient_email, message)
+
+        # Добавьте здесь проверки для убедительности
 
 class DocumentViewSetTestCase(TestCase):
     def test_create_document(self):
@@ -34,7 +42,6 @@ class DocumentViewSetTestCase(TestCase):
                 'user': 1}  # Предполагается, что пользователь с id=1 существует
 
         response = client.post(url, data, format='multipart')
-        print (response.json())
 
         self.assertEqual(response.status_code, 201)
 
