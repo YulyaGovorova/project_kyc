@@ -8,15 +8,13 @@ class DocumentAdmin(admin.ModelAdmin):
     actions = ['confirm_documents', 'reject_documents']
 
     def confirm_documents(self, request, queryset):
-        queryset.update(status=DocumentStatus.objects.get(name='Подтвержден'))
-    # confirm_documents.short_cdescription = "Подтвердить выбранные документы"
+        confirmed_status = DocumentStatus.objects.get(name='Подтвержден')
+        queryset.update(status=confirmed_status)
         for document in queryset:
-            send_document_status_notification.delay(document.id, 'подтвержден')
+            send_document_status_notification.delay(document, confirmed_status)
 
     def reject_documents(self, request, queryset):
-        queryset.update(status=DocumentStatus.objects.get(name='Отклонен'))
-    # reject_documents.short_description = "Отклонить выбранные документы"
+        rejected_status = DocumentStatus.objects.get(name='Отклонен')
+        queryset.update(status=rejected_status)
         for document in queryset:
-            send_document_status_notification.delay(document.id, 'отклонен')
-
-admin.site.register(DocumentStatus)
+            send_document_status_notification.delay(document, rejected_status)

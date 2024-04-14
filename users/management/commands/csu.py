@@ -1,6 +1,7 @@
 import os
 
-from django.core.management import BaseCommand
+from django.contrib.auth import get_user_model
+from django.core.management import BaseCommand, CommandError
 from users.models import User
 
 class Command(BaseCommand):
@@ -15,3 +16,4 @@ class Command(BaseCommand):
         )
         user.set_password(os.getenv('ADMIN_PASSWORD'))
         user.save()
+

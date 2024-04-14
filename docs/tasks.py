@@ -12,3 +12,5 @@ def send_notification_email(recipient_email, message):
         send_mail('Notification', message, 'from@example.com', [recipient_email])
     except Exception as exc:
         raise Retry(exc)
+
+
