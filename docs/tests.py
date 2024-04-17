@@ -1,6 +1,4 @@
 import unittest
-
-from django.core import mail
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
@@ -38,13 +36,15 @@ class DocumentViewSetTestCase(TestCase):
         # Создаем временный файл для тестирования
         test_file = SimpleUploadedFile("test.pdf", b"file_content", content_type="application/pdf")
 
+        # Создаем пользователя
+        user = User.objects.create(email='test@example.com')
+
         data = {'title': 'Test Document', 'file': test_file,
-                'user': 1}  # Предполагается, что пользователь с id=1 существует
+                'status': 'pending', 'user': user.pk}
 
         response = client.post(url, data, format='multipart')
 
         self.assertEqual(response.status_code, 201)
-
 
 if __name__ == '__main__':
     unittest.main()
