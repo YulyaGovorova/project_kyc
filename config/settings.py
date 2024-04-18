@@ -131,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia'
 
 USE_I18N = True
 
@@ -163,21 +163,28 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/users/'
 
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_SSL = True
+
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'govorovay15@gmail.com'
+EMAIL_HOST_PASSWORD = 'opvijikfxpeolcls'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
 CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
 CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
+CELERY_TIMEZONE = "Asia"
 
 CELERY_BEAT_SCHEDULE = {
     'send-notification-every-1-minutes': {
         'task': 'docs.tasks.send_notification_email',  # Путь к задаче
         'schedule': timedelta(minutes=1),
-        'args': ('recipient@example.com', 'Hello, world!'),
+        'args': ('tishylya.1@yandex.ru', 'Hello, world!'),
     },
 }
 
