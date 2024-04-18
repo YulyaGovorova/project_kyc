@@ -10,6 +10,6 @@ from django.views.decorators.http import require_POST
 def upload_document(request):
     # Обработка загруженного документа
     # Отправка уведомления администратору
-    send_mail('Новый документ', 'Поступил новый документ', 'from@example.com', ['admin@example.com'])
+    send_mail('Новый документ', 'Поступил новый документ', 'govorovay15@gmail.com', ['tishyulya.1@yandex.ru'])
 
     return JsonResponse({'message': 'Документ успешно загружен'})
