@@ -8,6 +8,12 @@ from docs.tasks import send_notification_email
 
 
 class DocumentViewSet(viewsets.ModelViewSet):
+    """
+    Представление для работы с документами,
+    CRUD операции над документами.
+    Отправляет уведомления пользователю
+    о статусе его документа.
+    """
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
     parser_classes = (MultiPartParser, FormParser)
