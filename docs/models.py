@@ -5,6 +5,12 @@ from users.models import User
 
 
 class Document(models.Model):
+    """
+    Модель для хранения информации
+    о документах,
+    их статусе и пользователях,
+    загрузивших документы.
+    """
 
     title = models.CharField(max_length=255)
     file = models.FileField(upload_to='documents/')
@@ -27,6 +33,10 @@ class Document(models.Model):
 
 
 class DocumentStatusChange(models.Model):
+    """
+    Модель для отслеживания
+    изменений статуса документов.
+    """
     document = models.ForeignKey(Document, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('approved', 'Approved'), ('rejected', 'Rejected')])
     changed_at = models.DateTimeField(auto_now_add=True)
@@ -41,6 +51,11 @@ class DocumentStatusChange(models.Model):
 
 
 class DocumentStatus(models.Model):
+    """
+    Модель для хранения
+    различных статусов
+    документов.
+    """
     name = models.CharField(max_length=50)
 
     def __str__(self):
@@ -52,6 +67,11 @@ class DocumentStatus(models.Model):
 
 
 class CustomNotification(Notification):
+    """
+    Пользовательская модель
+    уведомлений с привязкой
+    к документам.
+    """
     document = models.ForeignKey(Document, on_delete=models.CASCADE)
 
     def __str__(self):
